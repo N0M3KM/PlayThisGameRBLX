@@ -25,6 +25,7 @@ local Voting = require(Services.VotingService.Implementation)
 local Scenarios = require(Services.ScenarioDirector.Implementation)
 local Loop = require(Services.GameLoopService.Implementation)
 local StubFactories = require(script.Parent.StubFactories)
+local DroidPreview = require(script.Parent.DroidPreview)
 local Match = {}
 local started = false
 local activeFramework: Framework.Adapter? = nil
@@ -128,9 +129,13 @@ function Match.start()
 			end
 		end
 	end
+	local playerChanged: ((Payloads.PlayerStateSnapshot) -> ())? = nil
 	local real: { [string]: Service.Interface } = {
 		MapService = MapService.new(),
 		PlayerStateService = PlayerState.new(function(snapshot: Payloads.PlayerStateSnapshot)
+			if playerChanged then
+				playerChanged(snapshot)
+			end
 			local player = Players:GetPlayerByUserId(snapshot.UserId)
 			if player then
 				player:SetAttribute("MatchPlayerState", snapshot.State)
@@ -148,6 +153,22 @@ function Match.start()
 			presentation:SetAttribute("Results", HttpService:JSONEncode(results))
 		end),
 	}
+	for _, entry in Catalog do
+		if not real[entry.Name] then
+			real[entry.Name] = StubFactories[entry.Name]()
+		end
+	end
+	local droidPreview = nil
+	if Config.DroidPreview then
+		assert(assets, "Droid preview requires Assets")
+		local ok, preview = pcall(DroidPreview.new, resolve, real, assets, scope)
+		if not ok then
+			scope:destroy()
+			error(tostring(preview), 0)
+		end
+		droidPreview = preview
+		playerChanged = droidPreview.playerChanged
+	end
 	local registered: { Service.Interface } = {}
 	local outcome = table.pack(pcall(function()
 		for _, entry in Catalog do
@@ -164,11 +185,14 @@ function Match.start()
 		end
 		-- Dependency services start before the loop subscribes/schedules.
 		for _, facade in registered do
-			if facade.Name ~= "GameLoopService" then
+			if facade.Name ~= "GameLoopService" and not facade:IsStarted() then
 				facade:Start()
 			end
 		end
 		real.GameLoopService:Start()
+		if droidPreview then
+			droidPreview.start()
+		end
 		local removing = Players.PlayerRemoving:Connect(function(player)
 			local voter = real.VotingService :: Voting.Voting
 			voter:RemovePlayer(player.UserId)

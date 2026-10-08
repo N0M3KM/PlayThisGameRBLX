@@ -315,6 +315,21 @@ function Implementation.new(
 		local outcome = commit(userId, record, candidate, checkpointTime)
 		return if outcome.Ok then receipt else Result.failure(outcome.Code)
 	end
+	service.ReadLoadout = function(
+		_self: Service.Interface,
+		userId: number
+	): Result.Result<Payloads.LoadoutSelection>
+		local record = current(userId)
+		if not record then
+			return Result.failure("NotReady")
+		end
+		local selection = record.Committed.Loadout
+		return Result.success(table.freeze({
+			GearIds = table.freeze(table.clone(selection.Gears)),
+			ArmourId = selection.Armour,
+			ClassId = selection.Class,
+		}))
+	end
 	service.ReadBoosts = function(
 		_self: Service.Interface,
 		userId: number

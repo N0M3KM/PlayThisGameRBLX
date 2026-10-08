@@ -1,0 +1,25 @@
+--!strict
+-- Bounds and provisional physical tuning. TODO(owner): playtest movement/geometry.
+return table.freeze({
+	MaxEntities = 512,
+	MaxEventEntities = 64,
+	MaxPooledRigs = 512,
+	MaxAlliesPerOwner = 8,
+	AllyLifetimeSeconds = 40,
+	MinimumSpawnDistance = 8,
+	RecoveryHeight = -100,
+	SpawnLift = 4,
+	WalkSpeed = 16,
+	MeleeRange = 5,
+	RecoveryIntervalSeconds = 0.25,
+	SpawnBatchSize = 16,
+	PathQueueLimit = 64,
+	PathConcurrency = 2,
+	PathsPerStep = 2,
+	PathTimeoutSeconds = 2,
+	PathCacheSeconds = 2,
+	PathRepathSeconds = 1,
+	WaypointTolerance = 3,
+	MovementEpsilon = 0.5,
+	TuningApproved = false,
+})

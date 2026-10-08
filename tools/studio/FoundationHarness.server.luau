@@ -120,6 +120,14 @@ local function verifyFacades()
 			elseif
 				(entry.Name == "PlayerStateService" and command == "ResetRound")
 				or (entry.Name == "VotingService" and command == "Close")
+				or (
+					command == "ClearRound"
+					and (
+						entry.Name == "StatService"
+						or entry.Name == "StatusEffectService"
+						or entry.Name == "LoadoutService"
+					)
+				)
 			then
 				check(result == nil, `{entry.Name}.{command} retains its void return`)
 			else

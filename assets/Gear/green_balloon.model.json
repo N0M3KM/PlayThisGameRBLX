@@ -1,0 +1,27 @@
+{
+    "className":  "Tool",
+    "properties":  {
+                       "RequiresHandle":  true
+                   },
+    "attributes":  {
+                       "DefinitionId":  "green_balloon"
+                   },
+    "children":  [
+                     {
+                         "className":  "Part",
+                         "properties":  {
+                                            "CanTouch":  false,
+                                            "CanCollide":  false,
+                                            "Anchored":  false,
+                                            "Massless":  true,
+                                            "CanQuery":  false,
+                                            "Size":  [
+                                                         1,
+                                                         1,
+                                                         1
+                                                     ]
+                                        },
+                         "name":  "Handle"
+                     }
+                 ]
+}

@@ -5,5 +5,5 @@ export type Interface = DomainInterfaces.StatusEffectService
 return table.freeze({
 	Name = "StatusEffectService",
 	Draft = true,
-	Commands = table.freeze({ "Apply", "Remove", "Clear" }),
+	Commands = table.freeze({ "Apply", "Remove", "Clear", "ClearRound" }),
 })

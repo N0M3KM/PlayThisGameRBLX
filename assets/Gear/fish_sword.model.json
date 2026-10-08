@@ -1,0 +1,33 @@
+{
+    "className":  "Tool",
+    "properties":  {
+                       "RequiresHandle":  true
+                   },
+    "attributes":  {
+                       "DefinitionId":  "fish_sword"
+                   },
+    "children":  [
+                     {
+                         "className":  "Part",
+                         "properties":  {
+                                            "CanTouch":  false,
+                                            "CanCollide":  false,
+                                            "Anchored":  false,
+                                            "Massless":  true,
+                                            "CanQuery":  false,
+                                            "Size":  [
+                                                         1,
+                                                         1,
+                                                         1
+                                                     ]
+                                        },
+                         "name":  "Handle",
+                         "children":  [
+                                          {
+                                              "name":  "HitboxAttachment",
+                                              "className":  "Attachment"
+                                          }
+                                      ]
+                     }
+                 ]
+}

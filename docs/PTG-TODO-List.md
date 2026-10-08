@@ -2,15 +2,19 @@
 
 Baseline: 2026-10-07. Source: `D:\13Games\PLAY_THIS_GAME_BRIEF.md`, v0.1 Foundation Build. Planning documentation is approved. **Coding authorized 2026-10-08. The owner has authorized gameplay task agents before formal M1 completion; contracts remain unfrozen.** Root [AGENTS.md](../AGENTS.md) governs work; [index](README.md) links all supporting plans.
 
-## Implementation checkpoint (2026-10-08)
+## Implementation checkpoint (2026-10-09)
 
 Latest owner exception: proceed with task-specific implementation agents, fix draft contracts, omit evidence-file updates, and do not rerun unit suites. WS-A-01 through WS-A-07 and the Match portion of WS-I have source implementations in `match.project.json`: loop, voting, map/scenario catalogs, player state, teleport, pure results, primitive lobby, and HUD. MCP now reaches the owner's Studio workspace. Root repaired the foundation harness's native return checks and integrated the reviewed voting, loop-restart, Studio identity and strict-type fixes. The Match preview starts in Play, all three map templates load/unload, and all five scenario plans resolve. They remain In progress pending combat/droids/events/data, two-client and full-catalog integration. See root README for the current development selector and checks; historical evidence files are unchanged.
 
-A-to-B continuation (2026-10-08): A source hardening and interface orchestration are integrated; Studio preview confirmed two-boss celebration/results and immediate map/lobby cleanup. A-08 still requires real B/C/D/E/G, full catalog/multiplayer acceptance and prepared test execution. B-01 through07 now have source implementations; B-08 injected Studio checks cover transactions/shop/inventory/boosts/projections/reward retries/load recovery. Real persistence, real ReplicaService networking, upstream reward context/retry integration and journal compaction remain pending. Source implementation alone does not check off acceptance. See root README, ADR-007 and TASK-THREADS for the handoff.
+A-to-B continuation (2026-10-08): A source hardening and interface orchestration are integrated; Studio preview confirmed two-boss celebration/results and immediate map/lobby cleanup. A-08 still requires integrated B/C/D/E/G, full catalog/multiplayer acceptance and prepared test execution. B-01 through07 now have source implementations; B-08 injected Studio checks cover transactions/shop/inventory/boosts/projections/reward retries/load recovery. Real persistence, real ReplicaService networking, upstream reward context/retry integration and journal compaction remain pending. Source implementation alone does not check off acceptance. See root README, ADR-007 and TASK-THREADS for the handoff.
+
+C continuation checkpoint (2026-10-08): WS-C-01 through WS-C-07 have source implementations and integration is running: damage/contribution facts, stat/status and rig adapters, loadout, ammo/cooldown/gateway, projectile adapter, melee/booster strategies, and nine typed gear definitions with primitive Tools. Their acceptance remains In progress. An injected memory-only Studio smoke passed in one client, including damage/ammo/reload, private Tool guards, stat restoration, empty-loadout registration and death/respawn cleanup; the later D preview selects real C damage/stat/status and droids, while player gear/data/events remain staged. FastCastRedux is not installed, F's Lightsaber summon callback is pending, and missing weapon/jump tuning remains owner TODO. WS-C-08 remains open pending actual multi-client combat/abuse evidence. The A/B checkpoint was committed and pushed as `a4da730ce13bf0bc10f521c133576fab80b3b29f`; its acceptance gates remain open.
+
+D continuation checkpoint (2026-10-09): WS-D-01 through WS-D-07 source implemented: pure BT/brains, seven definitions/primitive rigs, pooled cap-aware spawning/independent deadlines, immutable Actor messages, bounded pool/LOD/watchdogs, serial perception/path/movement and C-backed attacks/allied hooks. Static checks pass; prepared D regression modules are registered without executing unit suites. Earlier one-client probes passed three-map caps50/50/75, respawns/pool/ownership/allied teardown, attack/status fixtures and actual Actor failure isolation53 assertions. The main preview reached Active with75 real droids; the final live damage/cleanup probe was interrupted and is not passed. D-08 remains In progress for full integration/performance/multiplayer/device checks. Missing FastCast and unspecified tuning remain fail-closed ports. Owner requested fewer Play tests; final continuation is static-only. Owner explicitly authorized the C/D source checkpoint commit/push and continuation into E on 2026-10-09; completion gates remain open.
 
 Root owns the serial foundation. Groups01/03 completed read-only source reviews; Group02 supplied initial contract recommendations but its dependency audit established no new pins. Root integrated the verified fixes. Implemented: 29 typed Interface/Stub pairs, draft payloads/enums, Knit adapter and Studio-only boot, cleanup scopes, pure registry/RNG/config validation primitives, primitive map validation and fixture factory, and a local check pipeline. The [evidence log](evidence/PHASE-0-START.md) records exact checks and omissions.
 
-WS-0-01 through WS-0-09 have partial foundation artifacts and remain In progress. None is checked as complete. WS-0-04/05 now include 13 canonical request schemas, minimal match/private projection validation, injected snapshot subscriptions and a prepared public Studio client fixture. WS-0-08 includes recovery-anchor/malformed-spawn rejection and an explicit harness pass/fail marker. WS-0-09 passes 50 pure tests plus 29 static shell checks. WS-0-10 is Pending M1: full signal/replica/domain schema coverage, content discovery, durable transaction/reward/Actor shapes, mandated adapters/package audit and observed Studio server/client evidence are required before freeze. Domain implementation in groups 01/02/03 is queued behind that gate. No live persistence, receipts, combat or economy is enabled by the stubs.
+WS-0-01 through WS-0-09 have partial foundation artifacts and remain In progress. None is checked as complete. WS-0-04/05 now include 13 canonical request schemas, minimal match/private projection validation, injected snapshot subscriptions and a prepared public Studio client fixture. WS-0-08 includes recovery-anchor/malformed-spawn rejection and an explicit harness pass/fail marker. WS-0-09 passes 50 pure tests plus 29 static shell checks. WS-0-10 is Pending M1: full signal/replica/domain schema coverage, content discovery, durable transaction/reward/Actor shapes, mandated adapters/package audit and observed Studio server/client evidence are required before freeze. Its original queue placed domain work after this gate; the owner's later exception authorizes the current gameplay work, tracked in the checkpoints above. Default foundation boot retains safe stubs; the selected Studio Match preview enables D spawning and C damage/stat/status, while persistence, player gear and events remain staged.
 
 ## Scope and tracking
 
@@ -402,7 +406,7 @@ Resolve damage/traits/faction/actual HP loss, one death fact and source attribut
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/Services/Combat/DamageService.luau; src/shared/Util/Combat/DamageLedger.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** No client damage authority; BulletImmune rejects bullets; duplicate deaths/overkill cannot inflate rewards; assists retained. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (source implementation present; integration running).
 
 #### WS-C-02
 
@@ -414,7 +418,7 @@ Pure modifier layers with source removal; proposed strongest-active-factor movem
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/Services/Combat/{StatService,StatusEffectService,RigAdapter}.luau; src/shared/Util/Combat/StatModifier.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** All layers resolve predictably; Ghost3/Booster2/Cola2 together resolve32 from baseline16 without multiplication; removing sources reveals next strongest factor and restores16 when none remain; fixtures marked proposed pending playtest; timers/generation guards; supported R6/R15 fallback; expiry/removal restores base stats. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (source implementation present; integration running; proposed tuning remains unapproved).
 
 #### WS-C-03
 
@@ -426,7 +430,7 @@ Server weapon-state models, reload/action reservations and cheap network guards 
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/shared/Util/Combat/{AmmoModel,CooldownTracker}.luau; src/server/Services/Combat/CombatGateway.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** NaN/infinite/spam/wrong-state/stale requests fail; ammo/reserve/reload boundaries pass; no per-frame reliable request requirement. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (source implementation present; integration running).
 
 #### WS-C-04
 
@@ -438,7 +442,7 @@ Lobby equip ownership rules, immutable teleport snapshot, Backpack/Character mon
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/Services/Combat/{LoadoutService,ToolGrantGuard}.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** 3 gears/1 armour/1 class; mid-round purchase/equip/loadout blocked; tools only from snapshot and never usable in lobby. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (source implementation present; integration running).
 
 #### WS-C-05
 
@@ -450,7 +454,7 @@ Wrap approved cast simulation, server origin/ammo/rate checks, pooled cosmetics 
 - **Dependencies:** WS-C-01, WS-C-03.
 - **Owned files:** `src/server/Services/Combat/ProjectileService.luau; src/server/Behaviors/Gear/Gun.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Client tracer cannot award damage; impossible origin/rate/ammo rejected; casts/pool reset at round exit; all 3 gun ammo fixtures pass. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (adapter source present; FastCastRedux not installed).
 
 #### WS-C-06
 
@@ -462,7 +466,7 @@ Server arc/box hits, minor/strong knockback, passive jump/speed and source-tagge
 - **Dependencies:** WS-C-01, WS-C-02, WS-C-03.
 - **Owned files:** `src/server/Behaviors/Gear/{Melee,Booster}.luau`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Server geometry validates hits; passives applied once/removed; missing tuning marked rather than hardcoded. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (source implementation present; integration running; proposed tuning remains unapproved).
 
 #### WS-C-07
 
@@ -474,7 +478,7 @@ Exact acquisition/damage/ammo definitions and primitive tool templates; Lightsab
 - **Dependencies:** WS-C-04, WS-C-05, WS-C-06.
 - **Owned files:** `src/server/Services/Combat/GearService.luau; src/shared/Config/Gears/*; assets/Gear/*`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** All 9 match catalog; wheel-only restricted; server cooldown40 for summon intent; no central hardcoded UI/gear list. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress (gear source and primitive assets present; F summon callback pending).
 
 ### Workstream D — Droid AI
 
@@ -488,7 +492,7 @@ Selector/Sequence/Condition/Action/Cooldown, blackboards and reusable ability su
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/AI/BehaviorTree/*; tests/unit/droids/*`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Independent blackboards; deterministic ticks/clock; ability error isolated and cancellation clears pending actions. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-02
 
@@ -500,7 +504,7 @@ Cap-aware map pool selection, server-owned rigs, 10 s death timer, different spa
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/Services/Droids/{DroidService,DroidPool,SpawnPolicy}.luau`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Exact cap formula; no respawn above cap; no last-spawn repeat; safe recovery above kill height; teardown cancels each timer. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-03
 
@@ -512,7 +516,7 @@ Audit API thread-safety; serialize target/sensory data and generation/version ru
 - **Dependencies:** WS-0-10.
 - **Owned files:** `src/server/AI/SnapshotPublisher.luau; docs/DECISIONS.md`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Primary API evidence recorded; no mutable Instance access in worker logic; stale/reused IDs rejected; serial perception fallback defined. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-04
 
@@ -524,7 +528,7 @@ Bounded workers/batches, near/mid/far schedules, ms/frame budget, decision colle
 - **Dependencies:** WS-D-01, WS-D-03.
 - **Owned files:** `src/server/Services/Droids/DroidBrainHost.luau; src/server/AI/{Actors,Scheduler}/*`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** No per-droid Heartbeat; real Actor parallelism demonstrated; serial mutations only; worker crash does not stall others. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-05
 
@@ -536,7 +540,7 @@ Direct LOS chase, queued/cached paths, stuck/jump/repath, configurable target sc
 - **Dependencies:** WS-D-03, WS-D-04.
 - **Owned files:** `src/server/AI/{Perception,Movement,PathQueue}/*`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Paths bounded; LOS/last-attacker/structure priorities respected; blocked/stuck/unreachable targets recover within budget. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-06
 
@@ -548,7 +552,7 @@ Populate catalog and melee/Lunge/Shoot/ThrowPaper/ShockGun/SitRecover, Wind trai
 - **Dependencies:** WS-D-01, WS-D-02.
 - **Owned files:** `src/shared/Config/Droids/*; src/server/AI/Abilities/*; assets/Droids/* excluding reserved Bosses/`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Exact HP/weights/damage/cooldowns/ranges; Wind never ordinary pool; lunge sit 3/CD 30 and shock stun 5 verified. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 #### WS-D-07
 
@@ -560,7 +564,7 @@ Faction filters and shared summon/despawn/query interfaces for F turrets/LightSa
 - **Dependencies:** WS-D-02, WS-D-05.
 - **Owned files:** `src/server/Services/Droids/FactionTargeting.luau; src/server/AI/Perception/StructureTargets.luau`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Allies do not attack players/allies; turrets valid hostile targets; owner/round removal clears targets; cap/lifetime configurable. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** Not started.
+- **Size:** M · **Priority:** P0 · **Parallelizable:** Y · **Status:** In progress - source implemented; acceptance gates remain open.
 
 ### Workstream E — Events, Bosses & Destruction
 
@@ -976,7 +980,7 @@ Two-client real hit/tool/respawn tests, locks, projectile ownership and reward f
 - **Dependencies:** WS-C-02, WS-C-03, WS-C-04, WS-C-07.
 - **Owned files:** `tests/integration/combat/*; docs/evidence/Combat.md (future)`; `tests/unit/combat/*` and `tests/integration/combat/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** Ammo/fire-rate/lobby-tool abuse matrix passes; HP/results agree server/clients; no duplicated character handlers. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** N · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** N · **Status:** Pending actual multi-client evidence; injected smoke is underway and not yet passed.
 
 ### Workstream D — Droid AI
 
@@ -990,7 +994,7 @@ Engine cap/respawn/Actor/ownership probes and fault/perf tests on all maps.
 - **Dependencies:** WS-D-04, WS-D-05, WS-D-06, WS-D-07, WS-C-05.
 - **Owned files:** `tests/integration/droids/*; docs/evidence/Droids.md (future)`; `tests/unit/droids/*` and `tests/integration/droids/*` as applicable. J coordinates only its reserved harness/test paths.
 - **Acceptance:** All 7 behave; cap achieved; independent respawn/recovery safe; p95/Actor metrics logged; no leaked workers/jobs per round. Relevant tests plus format/lint/type checks pass; record unavailable engine/hardware checks separately.
-- **Size:** L · **Priority:** P0 · **Parallelizable:** N · **Status:** Not started.
+- **Size:** L · **Priority:** P0 · **Parallelizable:** N · **Status:** In progress - targeted engine probes passed; full integration/performance gates open.
 
 ### Workstream E — Events, Bosses & Destruction
 

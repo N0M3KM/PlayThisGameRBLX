@@ -6,6 +6,10 @@ The owner's latest D-01/02/05/13/16/17/18/21/26 clarifications supersede the ori
 
 ## Contract conventions
 
+Combat draft lifecycle update (2026-10-08): canonical `DamageService.BeginRound(roundId)` and `ClearRound(roundId)` return `Result<boolean>`; `GetContributions(entity)` returns the detached, immutable actual-loss totals by credited UserId. BeginRound precedes combat admission. Retain damage facts and round MVP stats through results/reward consumers, then clear the round. Credit and faction come from registered authoritative sources; request credit/faction fields cannot override them. Source-less environmental damage currently fails closed. Death/fact identities carry a server-session namespace; retained ledgers fail closed at capacity rather than evicting reward facts.
+
+`StatService.Clear(entity)` returns `Result<boolean>`; `StatService.ClearRound`, `StatusEffectService.ClearRound`, and `LoadoutService.ClearRound` are void, idempotent cleanup commands. `LoadoutService.EquipSelection(userId, Requests.EquipLoadout)` persists the validated full category choice only under a held lobby reservation; `GetLocked(userId, roundId)` returns the immutable round selection. `ValidateTool` stays C-internal: clients and other workstreams receive no Tool handles. Matching safe stubs return NotReady for result methods and perform no work for void cleanup. These additions remain Version 0, unfrozen, and do not establish production integration or a completed gate.
+
 Draft integration update (2026-10-08): `ScenarioDirector.SelectScenario` accepts an optional validated preferred scenario for PickQueue; `DroidService.StopRound` owns round spawning/entity teardown; `DamageService.GetRoundStats` supplies server-owned MVP facts; `BossCoordinator.ObserveDeaths` exposes an owned subscription with a disconnect function. Public preview presentation includes alive IDs and results. These remain unfrozen interfaces and do not establish real combat/event/economy integration.
 
 Data draft update (2026-10-08): internal ProfileTypes is schema1 with Revision and transaction journal. Public PlayerData currently projects SchemaVersion/UserId/Revision/Coins/TotalXP/Level/Inventory/FreeSpinRemainingSeconds/PaidSpins only; the broader planned table below is not yet implemented. Coins/TotalXP preserve bounded fractional rewards, and server-derived nonzero safe integer Studio identities are accepted. Transactions acknowledge confirmed saves, reject changed ID reuse and fence uncertainty. B-local ProfileOperations adds trusted server-only atomic mutation/boost reads; no mutation callbacks are client requests. Inventory/shop/boost operations now use that boundary, while receipt dispatch remains G-owned and unimplemented. The journal fails closed at256 entries; compaction remains unresolved.
@@ -21,6 +25,8 @@ Proposed shared types: UserId, RoundId, EntityId, DefinitionId, RequestId, Trans
 Result<T> = success with T or failure with a stable code (InvalidRequest, UnknownId, WrongState, NotReady, NotOwned, InsufficientFunds, LimitReached, Cooldown, RateLimited, StaleRound, Unavailable). Exact serialized envelope is fixed in Phase 0; internal errors are logged, not leaked to clients.
 
 Enums proposed: RoundState per glossary; PlayerState Lobby/InRound/Dead/Spectating; EventState Created/Starting/Running/Stopping/Stopped; DroidState Spawning/Alive/Dead/Respawning/ReturningToPool; Faction Hostile/Player/Allied; outcomes Survived/NoSurvivors/BossDefeated/BossTimeout/Aborted. Freeze table values and validate transitions.
+
+D draft implementation update (2026-10-09): `DroidAI.Frame` is a finite data-only version1 tree (round/sequence/time, agents, targets and policy); the serial host publishes immutable SharedTables and accepts only matching pending jobs/current generations within receipt deadlines. Workers require modules before parallel execution, read snapshots only and synchronize before result delivery. Serial runtime rechecks current entities, decision age, faction, range, LOS and control locks before applying C damage/status. `DroidCombat.Port<Model>` is an injected server composition port; its shared generic declaration contains no Roblox engine type. `MapService.GetContext(roundId)` returns the existing frozen MapContext for that round. D definitions use `Maps` eligibility; ordinary weighted discovery excludes event-only definitions and preserves current pools. These remain draft interfaces, not a v1 freeze or full acceptance claim.
 
 ## Typed data domains
 
@@ -52,7 +58,7 @@ Names are canonical proposals; internal TeleportService must not be confused wit
 |---|---|---|---|
 | GameLoopService | A | GetState, Advance, Abort | MatchStateChanged, RoundStarted/Ended; seeded timer-driven stub cycle |
 | ScenarioDirector | A | SelectScenario/Events/Bosses | ScenarioPlan; deterministic injectable RNG fixtures |
-| MapService + MapValidator | A | Load, Validate, GetSpawns, Unload | MapReady/Failed; clone validated primitives |
+| MapService + MapValidator | A | Load, Validate, GetSpawns, GetContext, Unload | MapReady/Failed; clone validated primitives |
 | VotingService | A | Open, Cast, RemovePlayer, Resolve | VoteChanged, Winner; sticky ledger with seeded ties |
 | PlayerStateService | A | Get/Transition, SetAfk, GetAlive | PlayerStateChanged, AliveListChanged; real lifecycle with stub eligibility |
 | TeleportService (internal) | A | ToMap, ToLobby, Cancel | TeleportCompleted/Failed; safe primitive spawn fixture |
@@ -60,10 +66,10 @@ Names are canonical proposals; internal TeleportService must not be confused wit
 | ReplicaPublisher wrapper | B | PublishPrivate, PublishMatch, Remove | Versioned schema snapshots; deterministic fake channel |
 | EconomyService | B | SettleNonBossKill/SettleBossContributors/Survival, AwardXP, QueryBalance | Currency/LevelChanged; boss single-pool/dedupe fixture and linear level derivation |
 | ShopService | B | Purchase | Transaction result; reject unknown/state-invalid; stub no live writes |
-| LoadoutService | C | Equip, SnapshotAndLock, Grant, Unlock/Clear | LoadoutLocked/Changed; immutable fixture selection |
-| DamageService | C | Apply(source,target,base,tags), GetLedger | DamageApplied, EntityDied once; pure fixture HP/ledger |
-| StatService | C | Add/RemoveSource, Resolve | StatsChanged; strongest-positive-speed resolution with independent slowdown/status layers; deterministic fixture |
-| StatusEffectService | C | Apply, Remove, Clear | StatusChanged; clock-injected timed fixture |
+| LoadoutService | C | Equip/EquipSelection, SnapshotAndLock/GetLocked, Grant, Unlock/Clear/ClearRound | LoadoutLocked/Changed; immutable selection and private Tool ownership |
+| DamageService | C | BeginRound, Apply(DamageRequest), GetLedger/GetContributions/GetRoundStats, ClearRound | DamageApplied, EntityDied once; authoritative actual HP loss and retained contributions |
+| StatService | C | Add/RemoveSource, Resolve, Clear/ClearRound | StatsChanged; strongest-positive-speed resolution with independent slowdown/status layers; deterministic fixture |
+| StatusEffectService | C | Apply, Remove, Clear/ClearRound | StatusChanged; clock-injected timed fixture |
 | GearService | C | Use/Reload/Ability, Clear | GearStateChanged; validated no-op effects in stub |
 | UtilityService | F | Use, GetRemainingUses, Clear | UtilityConsumed/Failed; no live consumption in stub |
 | ProjectileService | C | Cast, CancelRound | ProjectileCosmetic/Hit server fact; deterministic fake cast |
@@ -85,6 +91,8 @@ Names are canonical proposals; internal TeleportService must not be confused wit
 Every row with a service gets an Interface + Stub, including extra internal services added to close ownership gaps. A stub may be functional enough to show the loop but must not masquerade as real persistence, payments or parallel AI. Public methods/signals and path conventions are finalized in WS-0-04/05.
 
 ## Intent remote inventory
+
+Combat binding draft (2026-10-08): `CombatRemoteBinding.bind(folder, gateway)` explicitly binds reliable `UseGear`, `ReloadGear`, and `UseAbility` RemoteEvents under the unique canonical `ReplicatedStorage.Shared.Remotes` folder. The server event supplies UserId; payloads pass the C gateway's shape, rate, replay, round, character and Tool guards. `CommandResult` acknowledges only the requesting player and a valid bounded RequestId; rate-limited requests receive no acknowledgement. Existing correctly typed endpoints are reused; duplicate or wrong-class names fail before mutation. One C binding owns its connections and any newly created command endpoints; normal teardown preserves the shared `CommandResult`. No binding occurs at module import or by this declaration, and this does not establish device or multiplayer acceptance.
 
 Proposed canonical folder: ReplicatedStorage/Shared/Remotes created by gateway/adapter. Use reliable RemoteEvents for commands with RequestId and a targeted CommandResult response. No server InvokeClient. Queries should use replicas/cached facts; only a demonstrated bounded query warrants RemoteFunction. Cosmetic unreliable transport is optional and cannot carry grants/state transitions.
 

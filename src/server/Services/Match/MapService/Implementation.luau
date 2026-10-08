@@ -146,6 +146,14 @@ function Implementation.new(): Interface.Interface
 		end
 		return Result.success(context.PlayerSpawns)
 	end
+	result.GetContext = function(
+		_self: Service.Interface,
+		roundId: number
+	): Result.Result<Payloads.MapContext>
+		return if context and context.RoundId == roundId
+			then Result.success(context)
+			else Result.failure("StaleRound")
+	end
 	result.Unload = function(_self: Service.Interface, roundId: number): Result.Result<boolean>
 		if context and context.RoundId ~= roundId then
 			return Result.failure("StaleRound")

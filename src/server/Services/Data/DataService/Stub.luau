@@ -6,7 +6,10 @@ local ServiceStub = require(script.Parent.Parent.Parent.Parent.Infrastructure.Se
 local Interface = require(script.Parent.Interface)
 
 return function(): Interface.Interface
-	local stub = ServiceStub.new("DataService", { "OpenSession", "Read", "Transact", "Save", "Release" })
+	local stub = ServiceStub.new(
+		"DataService",
+		{ "OpenSession", "Read", "ReadLoadout", "Transact", "Save", "Release" }
+	)
 	local result: Interface.Interface = {
 		Name = stub.Name,
 		IsStub = true,
@@ -37,6 +40,12 @@ return function(): Interface.Interface
 		end,
 		Read = function(_self: ServiceStub.Stub, _userId: number): Result.Result<Payloads.PlayerDataSnapshot>
 			return stub:Call("Read")
+		end,
+		ReadLoadout = function(
+			_self: ServiceStub.Stub,
+			_userId: number
+		): Result.Result<Payloads.LoadoutSelection>
+			return stub:Call("ReadLoadout")
 		end,
 		Transact = function(
 			_self: ServiceStub.Stub,

@@ -73,6 +73,12 @@
     "ServerStorage": {
       "Assets": {
         "$className": "Folder",
+        "Droids": {
+          "$path": "assets/Droids"
+        },
+        "Gear": {
+          "$path": "assets/Gear"
+        },
         "Lobby": {
           "$path": "assets/Lobby"
         },

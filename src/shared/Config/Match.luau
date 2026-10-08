@@ -14,4 +14,5 @@ return table.freeze({
 	MapCoordinateLimit = 100000,
 	RecoveryHeight = -50,
 	PreviewOnly = true, -- No profile/reward/combat claim until the domain services replace their stubs.
+	DroidPreview = true, -- Studio-only real droids/melee; persistence, player gear and events remain stubbed.
 })

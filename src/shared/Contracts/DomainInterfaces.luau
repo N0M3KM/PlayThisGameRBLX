@@ -32,6 +32,7 @@ export type ScenarioDirector = Service.Interface & {
 }
 
 export type MapService = Service.Interface & {
+	GetContext: (self: Service.Interface, roundId: number) -> Result.Result<Payloads.MapContext>,
 	Load: (self: Service.Interface, roundId: number, mapId: string) -> Result.Result<Payloads.MapContext>,
 	Validate: (self: Service.Interface, map: Payloads.MapDescriptor) -> Result.Result<Payloads.MapDescriptor>,
 	GetSpawns: (self: Service.Interface, roundId: number) -> Result.Result<{ Payloads.Point }>,
@@ -84,6 +85,7 @@ export type TeleportService = Service.Interface & {
 }
 
 export type DataService = Service.Interface & {
+	ReadLoadout: (self: Service.Interface, userId: number) -> Result.Result<Payloads.LoadoutSelection>,
 	OpenSession: (self: Service.Interface, userId: number) -> Result.Result<boolean>,
 	Read: (self: Service.Interface, userId: number) -> Result.Result<Payloads.PlayerDataSnapshot>,
 	Transact: (
@@ -135,6 +137,17 @@ export type ShopService = Service.Interface & {
 }
 
 export type LoadoutService = Service.Interface & {
+	EquipSelection: (
+		self: Service.Interface,
+		userId: number,
+		request: Requests.EquipLoadout
+	) -> Result.Result<boolean>,
+	GetLocked: (
+		self: Service.Interface,
+		userId: number,
+		roundId: number
+	) -> Result.Result<Payloads.LoadoutSnapshot>,
+	ClearRound: (self: Service.Interface, roundId: number) -> (),
 	Equip: (
 		self: Service.Interface,
 		userId: number,
@@ -152,6 +165,12 @@ export type LoadoutService = Service.Interface & {
 }
 
 export type DamageService = Service.Interface & {
+	BeginRound: (self: Service.Interface, roundId: number) -> Result.Result<boolean>,
+	ClearRound: (self: Service.Interface, roundId: number) -> Result.Result<boolean>,
+	GetContributions: (
+		self: Service.Interface,
+		entity: Payloads.EntityRef
+	) -> Result.Result<{ [number]: number }>,
 	GetRoundStats: (self: Service.Interface, roundId: number) -> Result.Result<{ Payloads.RoundStat }>,
 	Apply: (self: Service.Interface, request: Payloads.DamageRequest) -> Result.Result<Payloads.DamageFact>,
 	GetLedger: (
@@ -161,6 +180,8 @@ export type DamageService = Service.Interface & {
 }
 
 export type StatService = Service.Interface & {
+	Clear: (self: Service.Interface, entity: Payloads.EntityRef) -> Result.Result<boolean>,
+	ClearRound: (self: Service.Interface, roundId: number) -> (),
 	Add: (
 		self: Service.Interface,
 		entity: Payloads.EntityRef,
@@ -175,6 +196,7 @@ export type StatService = Service.Interface & {
 }
 
 export type StatusEffectService = Service.Interface & {
+	ClearRound: (self: Service.Interface, roundId: number) -> (),
 	Apply: (
 		self: Service.Interface,
 		entity: Payloads.EntityRef,

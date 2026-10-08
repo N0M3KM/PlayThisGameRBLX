@@ -144,6 +144,7 @@ export type LoadoutSnapshot = {
 	ArmourId: string?,
 	ClassId: string?,
 }
+export type LoadoutSelection = { GearIds: { string }, ArmourId: string?, ClassId: string? }
 export type StatModifier = { SourceId: string, Stat: string, Mode: "Add" | "Multiply", Value: number }
 export type ProjectileRequest = {
 	Source: EntityRef,

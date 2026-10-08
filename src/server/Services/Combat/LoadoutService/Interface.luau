@@ -5,5 +5,14 @@ export type Interface = DomainInterfaces.LoadoutService
 return table.freeze({
 	Name = "LoadoutService",
 	Draft = true,
-	Commands = table.freeze({ "Equip", "SnapshotAndLock", "Grant", "Unlock", "Clear" }),
+	Commands = table.freeze({
+		"Equip",
+		"EquipSelection",
+		"SnapshotAndLock",
+		"GetLocked",
+		"Grant",
+		"Unlock",
+		"Clear",
+		"ClearRound",
+	}),
 })

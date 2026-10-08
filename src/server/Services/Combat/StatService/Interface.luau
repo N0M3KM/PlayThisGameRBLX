@@ -5,5 +5,5 @@ export type Interface = DomainInterfaces.StatService
 return table.freeze({
 	Name = "StatService",
 	Draft = true,
-	Commands = table.freeze({ "Add", "RemoveSource", "Resolve" }),
+	Commands = table.freeze({ "Add", "RemoveSource", "Resolve", "Clear", "ClearRound" }),
 })

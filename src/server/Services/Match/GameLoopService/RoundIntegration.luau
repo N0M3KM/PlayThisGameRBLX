@@ -147,6 +147,9 @@ function RoundIntegration.new(resolve: (string) -> Service.Interface, preview: b
 		end,
 		start = function(roundId: number, mapId: string, plan: Payloads.EventPlan)
 			assert(plan.RoundId == roundId, "Stale event plan")
+			if not skipped(damage) then
+				command(damage:BeginRound(roundId), "Damage BeginRound")
+			end
 			if not skipped(droids) then
 				command(droids:StartSpawning(roundId, mapId), "StartSpawning")
 			end
@@ -182,6 +185,12 @@ function RoundIntegration.new(resolve: (string) -> Service.Interface, preview: b
 				end)
 			end
 			table.clear(locked)
+			-- Results consume the ledger before session cleanup releases its round.
+			if not skipped(damage) then
+				safely("damage ledger", function()
+					command(damage:ClearRound(roundId), "Damage ClearRound")
+				end)
+			end
 			if selection and not activated then
 				local restore = selection
 				safely("restore pick", function()

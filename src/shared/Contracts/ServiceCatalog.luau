@@ -15,7 +15,7 @@ local entries: { Entry } = {
 	{
 		Name = "MapService",
 		Group = "Match",
-		Commands = table.freeze({ "Load", "Validate", "GetSpawns", "Unload" }),
+		Commands = table.freeze({ "Load", "Validate", "GetSpawns", "GetContext", "Unload" }),
 	},
 	{
 		Name = "VotingService",
@@ -43,7 +43,7 @@ local entries: { Entry } = {
 	{
 		Name = "DataService",
 		Group = "Data",
-		Commands = table.freeze({ "OpenSession", "Read", "Transact", "Save", "Release" }),
+		Commands = table.freeze({ "OpenSession", "Read", "ReadLoadout", "Transact", "Save", "Release" }),
 	},
 	{
 		Name = "ReplicaPublisher",
@@ -65,18 +65,38 @@ local entries: { Entry } = {
 	{
 		Name = "LoadoutService",
 		Group = "Combat",
-		Commands = table.freeze({ "Equip", "SnapshotAndLock", "Grant", "Unlock", "Clear" }),
+		Commands = table.freeze({
+			"Equip",
+			"EquipSelection",
+			"SnapshotAndLock",
+			"GetLocked",
+			"Grant",
+			"Unlock",
+			"Clear",
+			"ClearRound",
+		}),
 	},
 	{
 		Name = "DamageService",
 		Group = "Combat",
-		Commands = table.freeze({ "Apply", "GetLedger", "GetRoundStats" }),
+		Commands = table.freeze({
+			"BeginRound",
+			"Apply",
+			"GetLedger",
+			"GetContributions",
+			"GetRoundStats",
+			"ClearRound",
+		}),
 	},
-	{ Name = "StatService", Group = "Combat", Commands = table.freeze({ "Add", "RemoveSource", "Resolve" }) },
+	{
+		Name = "StatService",
+		Group = "Combat",
+		Commands = table.freeze({ "Add", "RemoveSource", "Resolve", "Clear", "ClearRound" }),
+	},
 	{
 		Name = "StatusEffectService",
 		Group = "Combat",
-		Commands = table.freeze({ "Apply", "Remove", "Clear" }),
+		Commands = table.freeze({ "Apply", "Remove", "Clear", "ClearRound" }),
 	},
 	{
 		Name = "GearService",

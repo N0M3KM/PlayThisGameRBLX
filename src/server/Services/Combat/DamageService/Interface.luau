@@ -5,5 +5,12 @@ export type Interface = DomainInterfaces.DamageService
 return table.freeze({
 	Name = "DamageService",
 	Draft = true,
-	Commands = table.freeze({ "Apply", "GetLedger" }),
+	Commands = table.freeze({
+		"BeginRound",
+		"Apply",
+		"GetLedger",
+		"GetContributions",
+		"GetRoundStats",
+		"ClearRound",
+	}),
 })

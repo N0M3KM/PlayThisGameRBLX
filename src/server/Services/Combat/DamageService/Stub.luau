@@ -6,9 +6,24 @@ local ServiceStub = require(script.Parent.Parent.Parent.Parent.Infrastructure.Se
 local Interface = require(script.Parent.Interface)
 
 return function(): Interface.Interface
-	local stub = ServiceStub.new("DamageService", { "Apply", "GetLedger", "GetRoundStats" })
+	local stub = ServiceStub.new(
+		"DamageService",
+		{ "BeginRound", "Apply", "GetLedger", "GetContributions", "GetRoundStats", "ClearRound" }
+	)
 	local result: Interface.Interface = {
 		Name = stub.Name,
+		BeginRound = function(_self: ServiceStub.Stub, _roundId: number): Result.Result<boolean>
+			return stub:Call("BeginRound")
+		end,
+		ClearRound = function(_self: ServiceStub.Stub, _roundId: number): Result.Result<boolean>
+			return stub:Call("ClearRound")
+		end,
+		GetContributions = function(
+			_self: ServiceStub.Stub,
+			_entity: Payloads.EntityRef
+		): Result.Result<{ [number]: number }>
+			return stub:Call("GetContributions")
+		end,
 		GetRoundStats = function(
 			_self: ServiceStub.Stub,
 			_roundId: number

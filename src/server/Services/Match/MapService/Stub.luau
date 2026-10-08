@@ -6,7 +6,7 @@ local ServiceStub = require(script.Parent.Parent.Parent.Parent.Infrastructure.Se
 local Interface = require(script.Parent.Interface)
 
 return function(): Interface.Interface
-	local stub = ServiceStub.new("MapService", { "Load", "Validate", "GetSpawns", "Unload" })
+	local stub = ServiceStub.new("MapService", { "Load", "Validate", "GetSpawns", "GetContext", "Unload" })
 	local result: Interface.Interface = {
 		Name = stub.Name,
 		IsStub = true,
@@ -50,6 +50,9 @@ return function(): Interface.Interface
 		end,
 		Unload = function(_self: ServiceStub.Stub, _roundId: number): Result.Result<boolean>
 			return stub:Call("Unload")
+		end,
+		GetContext = function(_self: ServiceStub.Stub, _roundId: number): Result.Result<Payloads.MapContext>
+			return stub:Call("GetContext")
 		end,
 	}
 	return result

@@ -1,0 +1,63 @@
+--!strict
+-- Technical bounds and provisional simulation policy; not owner-approved balance.
+local DeepFreeze = require("../Util/DeepFreeze")
+local DroidAI = require("../Contracts/DroidAI")
+export type Config = {
+	WorkerCount: number,
+	MaxBatchSize: number,
+	MaxPendingBatches: number,
+	WorkerTimeoutSeconds: number,
+	MaxWorkerRetries: number,
+	FrameBudgetMs: number,
+	SenseBudgetMs: number,
+	MaxTickFailures: number,
+	FailureBackoffSeconds: number,
+	MaxDecisionsPerFrame: number,
+	MaxAgents: number,
+	MaxTargets: number,
+	MaxPairs: number,
+	MaxAbilitiesPerAgent: number,
+	MaxDecisionAgeSeconds: number,
+	NearDistance: number,
+	MidDistance: number,
+	NearIntervalSeconds: number,
+	MidIntervalSeconds: number,
+	FarIntervalSeconds: number,
+	Policy: DroidAI.Policy,
+	TuningApproved: boolean,
+}
+local config: Config = {
+	WorkerCount = 4,
+	MaxBatchSize = 32,
+	MaxPendingBatches = 4,
+	WorkerTimeoutSeconds = 1,
+	MaxWorkerRetries = 2,
+	FrameBudgetMs = 4,
+	SenseBudgetMs = 2,
+	MaxTickFailures = 3,
+	FailureBackoffSeconds = 1,
+	MaxDecisionsPerFrame = 64,
+	MaxAgents = 512,
+	MaxTargets = 512,
+	MaxPairs = 8192,
+	MaxAbilitiesPerAgent = 16,
+	MaxDecisionAgeSeconds = 0.5,
+	NearDistance = 80,
+	MidDistance = 200,
+	NearIntervalSeconds = 0.1,
+	MidIntervalSeconds = 0.25,
+	FarIntervalSeconds = 1,
+	Policy = {
+		MaxAgents = 512,
+		MaxTargets = 512,
+		AcquireRange = 300,
+		LastAttackerBonus = 30,
+		StructureBonus = 10,
+		DistanceWeight = 1,
+		StuckJumpSeconds = 2,
+		StuckRepathSeconds = 4,
+	},
+	TuningApproved = false,
+}
+DeepFreeze.freeze((config :: unknown) :: DeepFreeze.DataTable)
+return config
