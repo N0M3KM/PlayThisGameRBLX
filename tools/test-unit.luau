@@ -1,0 +1,15 @@
+--!strict
+-- Focused bootstrap checks; TestEZ/Jest adoption remains a separate dependency ADR.
+require("../tests/unit/foundation/Run")
+require("../tests/unit/foundation/RequestSchemas")
+require("../tests/unit/foundation/SnapshotBindings")
+require("../tests/unit/foundation/ShellManifest")
+require("../tests/unit/match/Run")
+require("../tests/unit/match/RoundArbitration")
+require("../tests/unit/data/RewardMath")
+require("../tests/unit/data/Transactions")
+require("../tests/unit/data/ShopTransactions")
+require("../tests/unit/data/ReplicaPublisher")
+require("../tests/unit/data/BoardSchemas")
+require("../tests/unit/data/PersistenceRecovery")
+require("../tests/unit/data/EconomySettlement")

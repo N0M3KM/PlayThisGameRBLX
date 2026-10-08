@@ -1,0 +1,229 @@
+{
+  "className": "Model",
+  "children": [
+    {
+      "name": "Geometry",
+      "className": "Folder",
+      "children": [
+        {
+          "name": "Floor",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": true,
+            "CanQuery": true,
+            "CanTouch": false,
+            "Size": [
+              160,
+              2,
+              160
+            ],
+            "Position": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "PlayerSpawns",
+      "className": "Folder",
+      "children": [
+        {
+          "name": "player_1",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              -9,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "name": "player_2",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              -3,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "name": "player_3",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              3,
+              4,
+              0
+            ]
+          }
+        },
+        {
+          "name": "player_4",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              9,
+              4,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "DroidSpawns",
+      "className": "Folder",
+      "children": [
+        {
+          "name": "droid_1",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              -40,
+              4,
+              -40
+            ]
+          }
+        },
+        {
+          "name": "droid_2",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              40,
+              4,
+              -40
+            ]
+          }
+        },
+        {
+          "name": "droid_3",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              -40,
+              4,
+              40
+            ]
+          }
+        },
+        {
+          "name": "droid_4",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              40,
+              4,
+              40
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bounds",
+      "className": "Folder",
+      "children": [
+        {
+          "name": "RecoveryPoint",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": false,
+            "CanQuery": false,
+            "CanTouch": false,
+            "Size": [
+              2,
+              1,
+              2
+            ],
+            "Position": [
+              0,
+              10,
+              0
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

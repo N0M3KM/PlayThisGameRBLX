@@ -1,0 +1,49 @@
+# Agent continuity note
+
+Updated: 2026-10-08. This is a compact navigation/handoff note, not a replacement for repository instructions or canonical project docs. Read it first in a returning session; consult the linked source documents for task-specific details, and reread only changed/relevant sections rather than every Markdown file.
+
+Git workflow authorization (2026-10-08): owner requested branch `ptg-initial` and automatic commit/push there whenever each workstream is complete, then explicitly requested an A/B checkpoint commit/push despite open acceptance and continuation into C. This permission persists; do not ask again. Preserve unrelated user changes and report actual acceptance, including downstream gates. Current task is Workstream C.
+
+## Where to look
+
+- `AGENTS.md`: current authorization, repository rules, owner-confirmed scope, ownership and file reservations. It is authoritative for how work is done.
+- `docs/PTG-TODO-List.md`: task DAG, statuses, acceptance criteria and milestones. It is the main tracker.
+- `docs/CONTRACTS.md`: public data/service boundaries and current contract candidate. Contracts are version 0 and unfrozen.
+- `docs/ARCHITECTURE.md`: runtime/layering proposal and integration design.
+- `docs/DECISIONS.md`: owner choices versus provisional tuning, unresolved risks and ADRs.
+- `docs/CONTENT-CATALOG.md`: v0.1 content and source-derived numbers.
+- `docs/MODEL_CONTRACT.md`: primitive asset structure, runtime placement and validators.
+- `docs/TEST-PLAN.md`: pure, mocked, Studio, persistence, security, device, perf and soak evidence expectations.
+- `docs/GLOSSARY.md`: canonical terminology/state names.
+- `docs/TASK-THREADS.md`: grouped review history and ownership/reservation map.
+- `docs/recipes/README.md`, `ADD_*.md`, `templates/*.md`: content-extension procedures and schematic templates; templates are not executable contracts.
+- `docs/evidence/PHASE-0-START.md`: historical, dated evidence. Do not infer current Studio access or tests from old entries; distinguish executed checks from prepared checks.
+- Root `README.md`: current selector/commands and implementation handoff; inspect for the latest operational state.
+
+## Project state at this update
+
+Formal M1 / WS-0-10 remains open; Contracts v1 has not been frozen. The owner explicitly authorized continued task-specific gameplay work before formal M1 completion, direct fixes to draft contracts, omitting new evidence-file entries, and skipping test reruns. This exception does not itself prove a Studio run or close the M1 gate. The task plan and docs index contain historical Phase 0 queue language; read their dated implementation checkpoint and newer root README/AGENTS context before relying on it.
+
+Workstream A (Match & Flow) and its Match UI preview have been implemented in the active development selector. Recent Studio preview observations reported in the conversation include natural 240-second round resolution, sticky physical pad voting, AFK exclusion, loop stop/start, respawn generation handling, map clone cleanup, and map/scenario plan checks. Treat those as conversation-reported project context, not formal evidence-file entries; the owner exception says not to add new evidence entries. Current coding task/phase should be established from the latest user message and root README/backlog checkpoint.
+
+Latest A-to-B request: task agents completed A arbitration/recovery, teleport/AFK/departure guards, explicit map vote weights, pick overrides and interface-only live-service orchestration. Studio preview confirmed two-boss celebration/Results and immediate lobby/map cleanup. A-08 acceptance remains open on real B/C/D/E/G. B-01 through07 now have source implementations, including ReplicaService adapter/projections, atomic shop/inventory, boosts, immutable reward context/settlement, bounded load retries and autosave. All B acceptance checkboxes remain open. Studio memory fixtures passed transactions/reload/fencing/cooldown, shop caps/unique/acquisition/state races, boost expiry, private projections and reward retries/load recovery. Data boot remains stubbed; no real ProfileService/DataStore or ReplicaService transport was exercised. Incomplete settlements require caller-retained retries; automatic/durable offline delivery and journal compaction remain pending. Journal fails closed at256 transactions. See README and ADR-007 for exact limits.
+
+New B cross-container imports use Roblox's `@game` alias. `tools/setup-require-paths.ps1` creates ignored headless junctions and is called by installation/check scripts. Run `check-foundation.ps1 -SkipTests` while the no-rerun exception remains. New prepared Match arbitration and reward regressions are registered but have not been executed. MCP server tools are available; execute diagnostics through a temporary ordinary server Script when the Assistant execution context has a separate module cache. Stop Play to remove temporary probes.
+
+Durability review found and fixed premature release bookkeeping: explicit releases, external session loss and discarded/late raw loads must retain key ownership until HopReady confirms completion. Timed-out releases stay fenced; shutdown reports unresolved ownership rather than success. New targeted injectable release checks exercise this path without rerunning the unit suite.
+
+B continuation review also tracks explicit Release jobs through shutdown, copies FIFO transaction commands before yielding, and owns settlement source facts before context providers can yield. New targeted Studio checks passed concurrent Release/Stop checkpoint ordering and caller mutation during queue/provider yields. Caller-held mutation candidates cannot rewrite the confirmed published snapshot. Root owns integration/docs; task-agent production reservations have been handed back after focused checks. Final SkipTests check passed format/lint/standard+Roblox strict types/foundation build; Match/default builds also passed.
+
+Externally removed top-level Configs/Controllers folders are not restored. Foundation/default Rojo nodes preserve existing unknown Studio descendants and allow fresh builds with empty containers. Studio weather remains present; Services/WeatherService is untouched. Last static checks use SkipTests; all three project builds pass.
+
+The prior package inspection found Knit and shared transitive packages under `ReplicatedStorage.Packages`, with ProfileService under `ServerScriptService.ServerPackages`; no server-only Wally package was misplaced in replicated packages. Generated package contents and `sourcemap.json` are not source and must not be edited.
+
+## Confirmed scope and cautions
+
+Owner-confirmed: 240-second normal round and boss deadline; non-boss killer-only reward formula, boss contribution-shared single pool; connected-playtime free-spin countdown that pauses offline; Tornado-only event content; Regular-derived boss at HP x50 with larger rig; exclude chair/sofa/obby and Gems; linear leveling direction; nerf speed stacking. Exact XP thresholds, speed composition/cap, boss scale, repeat-Tornado policy and wheel normalization remain proposed where docs say so. Never promote proposed tuning to owner-approved constants. No new dependencies, replacement of mandated libraries, frozen contract changes, commits or pushes without the applicable approval described in AGENTS.md.
+
+Preserve existing user changes and authored weather examples. Do not edit generated packages. Keep server authority over damage, currency, cooldowns, inventories and results; enforce scopes/cleanup and use service interfaces. Read the relevant stream's role card and backlog reservation before editing.
+
+## Memory limits
+
+There is no dependable implicit memory of every repository document across sessions. This file is durable workspace memory and should avoid rereading unrelated plans, but it can go stale. Check its update date and verify current state in README/backlog/contracts when starting; open the detailed doc only for the subsystem being changed. Do not reread all recipe templates unless editing content definitions.

@@ -1,0 +1,74 @@
+{
+  "className": "Model",
+  "children": [
+    {
+      "name": "Floor",
+      "className": "Part",
+      "properties": {
+        "Anchored": true,
+        "CanCollide": true,
+        "CanTouch": false,
+        "Size": [120, 2, 80],
+        "Position": [0, 0, 160]
+      }
+    },
+    {
+      "name": "LobbySpawn",
+      "className": "SpawnLocation",
+      "properties": {
+        "Anchored": true,
+        "Neutral": true,
+        "Size": [6, 1, 6],
+        "Position": [0, 3, 175]
+      }
+    },
+    {
+      "name": "AFKZone",
+      "className": "Part",
+      "properties": {
+        "Anchored": true,
+        "CanCollide": false,
+        "CanTouch": false,
+        "Transparency": 0.5,
+        "Size": [20, 1, 20],
+        "Position": [40, 2, 160]
+      }
+    },
+    {
+      "name": "VotePads",
+      "className": "Folder",
+      "children": [
+        {
+          "name": "Pad1",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": true,
+            "Size": [12, 1, 12],
+            "Position": [-30, 2, 140]
+          }
+        },
+        {
+          "name": "Pad2",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": true,
+            "Size": [12, 1, 12],
+            "Position": [0, 2, 140]
+          }
+        },
+        {
+          "name": "Pad3",
+          "className": "Part",
+          "properties": {
+            "Anchored": true,
+            "CanCollide": true,
+            "Size": [12, 1, 12],
+            "Position": [30, 2, 140]
+          }
+        }
+      ]
+    }
+  ]
+}

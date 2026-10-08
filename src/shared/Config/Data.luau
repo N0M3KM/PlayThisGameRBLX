@@ -1,0 +1,36 @@
+--!strict
+-- Draft technical persistence limits; defaults are TODO(owner), not an economy grant.
+local Game = require("./Game")
+return table.freeze({
+	SchemaVersion = 1,
+	DefaultCoins = 0,
+	DefaultTotalXP = 0,
+	DefaultFreeSpinRemainingSeconds = Game.FreeSpinCooldownSeconds,
+	MaxInteger = 9007199254740991,
+	MaxDepth = 24,
+	MaxEntries = 50000,
+	MaxStringLength = 8192,
+	MaxCollectionEntries = 4096,
+	UtilityCap = Game.UtilityCap,
+	GearSlots = Game.GearSlots,
+	AutosaveSeconds = 60,
+	CommitTimeoutSeconds = 15,
+	LoadTimeoutSeconds = 20,
+	ShutdownTimeoutSeconds = 25,
+	MaxTransactions = 256, -- Fail closed; no unsafe journal pruning.
+	MaxTransactionIdLength = 128,
+	MaxPendingShopPurchases = 16,
+	MaxPublicBoards = 4,
+	LoadMaxAttempts = 3,
+	LoadRetryBaseSeconds = 0.5,
+	LoadRetryMaxSeconds = 2,
+	AutosaveTickSeconds = 1,
+	MaxConcurrentAutosaves = 4,
+	MaxAutosavesPerTick = 4,
+	ProfileLoadTimeoutSeconds = 20,
+	ProfileSaveTimeoutSeconds = 15,
+	ProfileReleaseTimeoutSeconds = 15,
+	ProfilePollIntervalSeconds = 0.1,
+	MaxPendingProfileLoads = 16,
+	ProfileStoreName = "PTG_Development_v1",
+})

@@ -1,0 +1,10 @@
+{
+  "languageMode": "strict",
+  "lint": {
+    "UnknownGlobal": true
+  },
+  "aliases": {
+    "lune": "tools/toolchain/bin/lune-types/",
+    "game": "tools/toolchain/bin/datamodel/"
+  }
+}
